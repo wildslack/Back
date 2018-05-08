@@ -11,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor @Getter @Setter
 public class User {
 
-    @Id @GeneratedValue
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
 
     @Column (nullable = false, unique = true)
     private String email;
