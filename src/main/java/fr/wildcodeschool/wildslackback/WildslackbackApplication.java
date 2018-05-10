@@ -4,7 +4,9 @@ import fr.wildcodeschool.wildslackback.controllers.UserController;
 import fr.wildcodeschool.wildslackback.controllers.WorkspaceController;
 import fr.wildcodeschool.wildslackback.model.User;
 import fr.wildcodeschool.wildslackback.model.Workspace;
+import fr.wildcodeschool.wildslackback.model.WorkspaceManager;
 import fr.wildcodeschool.wildslackback.repo.UserRepository;
+import fr.wildcodeschool.wildslackback.repo.WorkspaceManagerRepository;
 import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +32,15 @@ public class WildslackbackApplication {
 
 	@Bean
 	public CommandLineRunner demo(UserRepository userRepository, UserController userController,
-                                  WorkspaceRepository workspaceRepository, WorkspaceController workspaceController) {
+                                  WorkspaceRepository workspaceRepository, WorkspaceController workspaceController,
+                                  WorkspaceManagerRepository workspaceManagerRepository) {
 		return args -> {
-			User bobtest = userController.create("test@test.test", "kùjgqqg", "bobtest");
-			User cattest = userController.create("dshfg@test.test", "qgarqegh", "cattest");
+			User bobtest = userController.create("test@test.test", "kùjgqqg", "bobtest", "apple", "apple's workspace");
+			User cattest = userController.create("dshfg@test.test", "qgarqegh", "cattest", "ibm", "ibm's workspace");
 //			repo.save(new User("test@test.test", "kùjgqqg", "bobtest"));
 //			repo.save(new User("dshfg@test.test", "qgarqegh", "cattest"));
-            Workspace apple = workspaceController.create("apple", "apple's workspace");
-            Workspace ibm = workspaceController.create("ibm", "ibm's workspace");
+//            Workspace apple = workspaceController.create("apple", "apple's workspace");
+  //          Workspace ibm = workspaceController.create("ibm", "ibm's workspace");
 
 
 			log.info("users found with finfAll() : ");
@@ -52,7 +55,19 @@ public class WildslackbackApplication {
             }
             log.info("");
 
-			StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder;
+
+            log.info("workspaceManagers found with finfAll() : ");
+            for(WorkspaceManager workspaceManager : workspaceManagerRepository.findAll()) {
+                log.info("id of manager : ");
+                stringBuilder = new StringBuilder();
+                log.info(stringBuilder.append(workspaceManager.getIdUser()).toString());
+                log.info("id of workspace : ");
+                stringBuilder = new StringBuilder();
+                log.info(stringBuilder.append(workspaceManager.getIdWorkspace()).toString());
+            }
+            log.info("");
+			stringBuilder = new StringBuilder();
 			log.info("id of bobtest : ");
 			log.info(stringBuilder.append(bobtest.getIDUser()).toString());
 
@@ -60,7 +75,7 @@ public class WildslackbackApplication {
 
             stringBuilder = new StringBuilder();
             log.info("id of ibm's workspace : ");
-            log.info(stringBuilder.append(ibm.getIdWorkspace()).toString());
+ //           log.info(stringBuilder.append(ibm.getIdWorkspace()).toString());
 
             log.info("");
 
