@@ -1,10 +1,13 @@
-package fr.wildcodeschool.wildslackback.dao;
+package fr.wildcodeschool.wildslackback.repositories;
 
 import fr.wildcodeschool.wildslackback.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+/**
+ * User repository for CRUD operations.
+ */
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByPseudo(String pseudo);
+    User findByUsername(String username);
 
 }

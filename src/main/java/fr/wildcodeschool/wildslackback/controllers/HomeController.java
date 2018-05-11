@@ -8,11 +8,11 @@ public class HomeController {
 
     @GetMapping(value="/")
     public String home() {
-        return "hello";
+        return "Bienvenu sur la landing page";
     }
 
     @GetMapping(value="private")
     public String privateArea() {
-        return "private";
+        return "vous authentifié commencé à discuter";
     }
 }

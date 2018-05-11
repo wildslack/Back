@@ -1,32 +1,29 @@
 package fr.wildcodeschool.wildslackback.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
 
-    @Id @GeneratedValue
-    private int idUser;
+    @Id
+    @GeneratedValue
+    private int id;
     private String mail;
-    private String pseudo;
+    private String username;
     private String password;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Role> roles;
 
+    User( ){}
 
-    public User(String mail, String pseudo, String password) {
+    public User(String mail, String username, String password, List<Role> roles) {
         this.mail = mail;
-        this.pseudo = pseudo;
+        this.username = username;
         this.password = password;
+        this.roles = roles;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
 
     public String getMail() {
         return mail;
@@ -36,12 +33,12 @@ public class User {
         this.mail = mail;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -50,5 +47,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public List<Role>  getRoles() {
+       return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
