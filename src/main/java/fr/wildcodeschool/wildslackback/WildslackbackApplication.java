@@ -27,13 +27,13 @@ public class WildslackbackApplication {
 	public BCryptPasswordEncoder getBPCE() {
 		return new BCryptPasswordEncoder();
 	}
-	/*
-	* @Override
-	public void run(String... arg0) throws Exception {
+
+
+/*	public void run(String... arg0) throws Exception {
 		accountService.saveUser(new AppUser(null, "steph","steph","stephendupre@gmail.com", null));
 		accountService.saveRole(new AppRole(null, "ADMIN"));
 		accountService.addRoleToUser("stephendupre64@gmail.com", "ADMIN");
 		accountService.addRoleToUser("stephendupre64@gmail.com", "USER");
-	}
-	* */
+	}*/
+
 }
