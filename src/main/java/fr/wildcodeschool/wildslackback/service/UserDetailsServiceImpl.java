@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) throw new UsernameNotFoundException(email);
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(r -> {
+        user.getRoles().forEach(r ->{
             authorities.add(new SimpleGrantedAuthority(r.getRoleName()));
         });
 

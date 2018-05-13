@@ -2,6 +2,7 @@ package fr.wildcodeschool.wildslackback.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,6 +38,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
         http.csrf().disable(); // desactive la génération automatique du jeton csrf de spring, attention ceci ouvre une breche de securité cross site request forgery
                                             // (verifier dans le header de la reponse http que dans set-cookie il y a bien la notion "HttpOnly qui interdit de lire le javascript).
         http.formLogin();
+        http.authorizeRequests().antMatchers("/login/**", "/register/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/private/**").hasAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();  //(Config pour obliger un user à se connecter, avec cette congi toute les ressources son ainsi sécurisées)
 
     }
