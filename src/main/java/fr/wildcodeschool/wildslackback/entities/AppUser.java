@@ -16,7 +16,6 @@ public class AppUser {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(unique = true)
     private String pseudo;
 
     private String password;
@@ -36,13 +35,6 @@ public class AppUser {
         super();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getPseudo() {
         return pseudo;

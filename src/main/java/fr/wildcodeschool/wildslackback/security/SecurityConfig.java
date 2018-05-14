@@ -23,12 +23,6 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        /* snippet pour tester l'authentification sans passer par la base
-        auth.inMemoryAuthentication()
-                .withUser("steph").password("1234").roles("ADMIN", "USER")
-                .and() // patern builder, on peux sinon mettre un ';'  pour ajouter un autre user de test pendant le dev
-                .withUser("julien").password("1234").roles("USER");
-                */
         auth.userDetailsService(userDetailsService)
             .passwordEncoder(bCryptPasswordEncoder);
 
@@ -41,7 +35,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // http.formLogin(); // je desactive la session et rend le systeme "stateless"
         http.authorizeRequests().antMatchers("/login/**", "/register/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/private/**").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/messages/**").hasAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();  //(Config pour obliger un user à se connecter, avec cette congi toute les ressources son ainsi sécurisées)
         http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
 

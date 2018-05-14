@@ -20,6 +20,7 @@ public class AccountRestController {
         if (user != null) throw new RuntimeException("This user already exists");
         AppUser appUser= new AppUser();
         appUser.setEmail(userForm.getEmail());
+        appUser.setPseudo(userForm.getPseudo());
         appUser.setPassword(userForm.getPassword());
         accountService.saveUser(appUser);
         accountService.addRoleToUser(userForm.getEmail(), "USER"); // attribution du role USER par default à l'utilisateur qui s'innscrit
