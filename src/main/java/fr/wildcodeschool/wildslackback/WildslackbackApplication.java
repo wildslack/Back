@@ -2,7 +2,7 @@ package fr.wildcodeschool.wildslackback;
 
 import fr.wildcodeschool.wildslackback.controllers.UserController;
 import fr.wildcodeschool.wildslackback.controllers.WorkspaceController;
-import fr.wildcodeschool.wildslackback.model.User;
+import fr.wildcodeschool.wildslackback.model.AppUser;
 import fr.wildcodeschool.wildslackback.model.Workspace;
 import fr.wildcodeschool.wildslackback.model.WorkspaceManager;
 import fr.wildcodeschool.wildslackback.repo.UserRepository;
@@ -13,16 +13,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import fr.wildcodeschool.wildslackback.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @EnableJpaRepositories("fr.wildcodeschool.wildslackback.repo")
 //@EntityScan("fr.wildcodeschool.wildslackback.model")
 //@EnableJpaAuditing
 @SpringBootApplication
-public class WildslackbackApplication {
+public class WildslackbackApplication  {
+
+	@Autowired
+	private AccountService accountService;
 
 	private static final Logger log = LoggerFactory.getLogger(WildslackbackApplication.class);
 
@@ -35,13 +41,13 @@ public class WildslackbackApplication {
                                   WorkspaceRepository workspaceRepository, WorkspaceController workspaceController,
                                   WorkspaceManagerRepository workspaceManagerRepository) {
 		return args -> {
-			User bobtest = userController.create("test@test.test", "kùjgqqg", "bobtest", "apple");
+			AppUser bobtest = userController.create("test@test.test", "kùjgqqg", "bobtest", "apple");
 			userController.create("dshfg@test.test", "qgarqegh", "cattest", "ibm");
 
 
 			log.info("users found with finfAll() : ");
-			for(User user : userRepository.findAll()) {
-				log.info(user.getPseudo());
+			for(AppUser appUser : userRepository.findAll()) {
+				log.info(appUser.getPseudo());
 			}
 			log.info("");
 
@@ -76,9 +82,9 @@ public class WildslackbackApplication {
             log.info("");
 
 			userRepository.findById(1L)
-					.ifPresent(user -> {
-						log.info("user found by id : ");
-						log.info(user.getMail());
+					.ifPresent(appUser -> {
+						log.info("appUser found by id : ");
+						log.info(appUser.getMail());
 						log.info("");
 					});
 
@@ -91,4 +97,10 @@ public class WildslackbackApplication {
 
 		};
 	}
+
+	@Bean
+	public BCryptPasswordEncoder getBPCE() {
+		return new BCryptPasswordEncoder();
+	}
+
 }

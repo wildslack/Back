@@ -1,25 +1,27 @@
 package fr.wildcodeschool.wildslackback.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long iDUser;
+    private long idUser;
+    @Column(unique = true)
     private String mail;
     private String password;
     private String pseudo;
 
+    @ManyToMany(fetch = FetchType.EAGER) // un utilisateur peut avoir plusieurs role et un role peut xoncerner plusieurs utilisateurs
+    private Collection<AppRole> roles = new ArrayList<>();
 
-    public User() {}
+    public AppUser() {}
 
-    public User(String mail, String password, String pseudo) {
+    public AppUser(String mail, String password, String pseudo) {
         this.mail = mail;
         this.password = password;
         this.pseudo = pseudo;
@@ -28,7 +30,7 @@ public class User {
 
 
     public long getIDUser() {
-        return iDUser;
+        return idUser;
     }
 
     public String getMail() {
@@ -53,5 +55,13 @@ public class User {
 
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
+    }
+
+    public Collection<AppRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<AppRole> roles) {
+        this.roles = roles;
     }
 }

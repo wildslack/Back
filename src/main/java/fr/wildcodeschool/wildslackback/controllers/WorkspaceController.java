@@ -38,7 +38,7 @@ public class WorkspaceController {
 
 /*   @RequestMapping(value = "/{IDUser}", method = RequestMethod.GET)
     @ResponseBody
-    public User findById(@PathVariable("IDUser") int id) {
+    public AppUser findById(@PathVariable("IDUser") int id) {
         return userRepository.findByIDUser(id);
     }*/
 
