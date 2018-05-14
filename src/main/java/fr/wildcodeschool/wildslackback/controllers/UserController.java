@@ -41,7 +41,6 @@ public class UserController {
     //@ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public User create(@RequestParam String mail, String password, String pseudo, String workspaceName) {
-//        return userRepository.create(user).getIDUser();
         User user = new User();
         user.setMail(mail);
         user.setPassword(password);
@@ -57,8 +56,6 @@ public class UserController {
         long workspaceId = workspace.getIdWorkspace();
         WorkspaceManager workspaceManager = new WorkspaceManager(userId, workspaceId);
         workspaceManagerRepository.save(workspaceManager);
-
-
 
         return user;
 
