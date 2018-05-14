@@ -38,15 +38,17 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`chanel` (
     REFERENCES `wildslack`.`workspace` (`id`));
 
 
+-------------------------------------------------------
+-- Table `wildslack`.`AppUser`
 -- -----------------------------------------------------
--- Table `wildslack`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `mail` VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `wildslack`.`User` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(10) NOT NULL,
   `pseudo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`ID`),
+
+  UNIQUE INDEX `mail_UNIQUE` (`email` ASC));
 
 
 -- -----------------------------------------------------

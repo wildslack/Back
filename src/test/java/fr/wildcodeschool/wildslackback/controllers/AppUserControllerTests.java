@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserControllerTests {
+public class AppUserControllerTests {
 
     @Autowired
     UserController userController;
@@ -29,12 +29,12 @@ public class UserControllerTests {
 
     @Test
     public void testBobtestExists() {
-        assertThat(userRepository.findByPseudo("bobtest").getMail().equals("test@test.test"));
+        assertThat(userRepository.findByPseudo("bobtest").getEmail().equals("test@test.test"));
     }
 
     @Test
     public void testCattestExists() {
-        assertThat(userRepository.findByPseudo("cattest").getMail().equals("dshfg@test.test"));
+        assertThat(userRepository.findByPseudo("cattest").getEmail().equals("dshfg@test.test"));
     }
 
 
