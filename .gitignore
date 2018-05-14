@@ -184,5 +184,5 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
-
+wildslackback.iml
 # End of https://www.gitignore.io/api/maven,angular,intellij
