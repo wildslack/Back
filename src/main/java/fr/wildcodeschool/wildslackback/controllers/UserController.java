@@ -35,13 +35,12 @@ public class UserController {
      * @param password
      * @param pseudo
      * @param workspaceName
-     * @param workspaceDescription
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
     //@ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public User create(@RequestParam String mail, String password, String pseudo, String workspaceName, String workspaceDescription) {
+    public User create(@RequestParam String mail, String password, String pseudo, String workspaceName) {
 //        return userRepository.create(user).getIDUser();
         User user = new User();
         user.setMail(mail);
@@ -51,11 +50,9 @@ public class UserController {
 
         Workspace workspace = new Workspace();
         workspace.setName(workspaceName);
-        workspace.setDescription(workspaceDescription);
         workspaceRepository.save(workspace);
 
         //create workspaceManager by saving idUser and idWorkspace in the Workspace_Manager table
-        //flush ?
         long userId = user.getIDUser();
         long workspaceId = workspace.getIdWorkspace();
         WorkspaceManager workspaceManager = new WorkspaceManager(userId, workspaceId);

@@ -20,13 +20,11 @@ public class WorkspaceController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public Workspace create(@RequestParam String name, String description) {
+    public Workspace create(@RequestParam String name) {
         Workspace workspace = new Workspace();
         workspace.setName(name);
-        workspace.setDescription(description);
         workspaceRepository.save(workspace);
         return workspace;
-
     }
 
     @RequestMapping(method = RequestMethod.GET)

@@ -35,12 +35,8 @@ public class WildslackbackApplication {
                                   WorkspaceRepository workspaceRepository, WorkspaceController workspaceController,
                                   WorkspaceManagerRepository workspaceManagerRepository) {
 		return args -> {
-			User bobtest = userController.create("test@test.test", "kùjgqqg", "bobtest", "apple", "apple's workspace");
-			User cattest = userController.create("dshfg@test.test", "qgarqegh", "cattest", "ibm", "ibm's workspace");
-//			repo.save(new User("test@test.test", "kùjgqqg", "bobtest"));
-//			repo.save(new User("dshfg@test.test", "qgarqegh", "cattest"));
-//            Workspace apple = workspaceController.create("apple", "apple's workspace");
-  //          Workspace ibm = workspaceController.create("ibm", "ibm's workspace");
+			User bobtest = userController.create("test@test.test", "kùjgqqg", "bobtest", "apple");
+			userController.create("dshfg@test.test", "qgarqegh", "cattest", "ibm");
 
 
 			log.info("users found with finfAll() : ");
@@ -51,7 +47,7 @@ public class WildslackbackApplication {
 
             log.info("workspaces found with finfAll() : ");
             for(Workspace workspace : workspaceRepository.findAll()) {
-                log.info(workspace.getDescription());
+                log.info(workspace.getName());
             }
             log.info("");
 
@@ -89,7 +85,7 @@ public class WildslackbackApplication {
             workspaceRepository.findById(4L)
                     .ifPresent(workspace -> {
                         log.info("workspace found by id : ");
-                        log.info(workspace.getDescription());
+                        log.info(workspace.getName());
                         log.info("");
                     });
 
