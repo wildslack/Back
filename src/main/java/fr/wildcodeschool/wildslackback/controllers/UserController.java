@@ -40,7 +40,7 @@ public class UserController {
     @ResponseBody
     public AppUser create(@RequestParam String mail, String password, String pseudo, String workspaceName) {
         AppUser appUser = new AppUser();
-        appUser.setMail(mail);
+        appUser.setEmail(mail);
         appUser.setPassword(password);
         appUser.setPseudo(pseudo);
         userRepository.save(appUser);
@@ -64,12 +64,6 @@ public class UserController {
     public Iterable<AppUser> getAllUsers() {
         return userRepository.findAll();
     }
-
-/*   @RequestMapping(value = "/{IDUser}", method = RequestMethod.GET)
-    @ResponseBody
-    public AppUser findById(@PathVariable("IDUser") int id) {
-        return userRepository.findByIDUser(id);
-    }*/
 
 
 

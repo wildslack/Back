@@ -1,6 +1,9 @@
 package fr.wildcodeschool.wildslackback.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +15,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idUser;
     @Column(unique = true)
-    private String mail;
+    private String email;
     private String password;
     private String pseudo;
 
@@ -21,8 +24,8 @@ public class AppUser {
 
     public AppUser() {}
 
-    public AppUser(String mail, String password, String pseudo) {
-        this.mail = mail;
+    public AppUser(String email, String password, String pseudo) {
+        this.email = email;
         this.password = password;
         this.pseudo = pseudo;
     }
@@ -33,18 +36,18 @@ public class AppUser {
         return idUser;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
+    @JsonIgnore // je veux pas que le password soit visible dans mes heacers même si il est encodé ( je suis paranoooo ;)
     public String getPassword() {
         return password;
     }
-
+    @JsonSetter
     public void setPassword(String password) {
         this.password = password;
     }

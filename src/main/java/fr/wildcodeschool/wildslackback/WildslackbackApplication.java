@@ -84,7 +84,7 @@ public class WildslackbackApplication  {
 			userRepository.findById(1L)
 					.ifPresent(appUser -> {
 						log.info("appUser found by id : ");
-						log.info(appUser.getMail());
+						log.info(appUser.getEmail());
 						log.info("");
 					});
 

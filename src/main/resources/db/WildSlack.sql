@@ -48,12 +48,12 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`Channel` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `wildslack`.`User` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `mail` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(10) NOT NULL,
   `pseudo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`),
 
-  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC));
+  UNIQUE INDEX `mail_UNIQUE` (`email` ASC));
 
 
 -- -----------------------------------------------------
