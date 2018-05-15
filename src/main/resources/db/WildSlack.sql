@@ -145,6 +145,16 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_manager` (
     REFERENCES `wildslack`.`workspace` (`id`));
 
 
+
+CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_manager` (
+ `id` INT NOT NULL AUTO_INCREMENT,
+  `role_name` VARCHAR(50)NOT NULL,
+  PRIMARY KEY (`id`)
+);
+INSERT INTO app_role values(1, 'USER');
+INSERT INTO app_role values(2, 'ADMIN');
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
