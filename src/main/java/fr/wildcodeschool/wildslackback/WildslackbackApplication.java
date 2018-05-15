@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -25,7 +26,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //@EntityScan("fr.wildcodeschool.wildslackback.model")
 //@EnableJpaAuditing
 @SpringBootApplication
-public class WildslackbackApplication  {
+public class WildslackbackApplication extends SpringBootServletInitializer {
 
 	@Autowired
 	private AccountService accountService;
