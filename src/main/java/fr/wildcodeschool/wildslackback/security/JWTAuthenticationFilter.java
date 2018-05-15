@@ -24,14 +24,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+        super();
         this.authenticationManager = authenticationManager;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         AppUser appUser = null;
-       // String email = request.getParameter("email"); si l'on recoit des données au format "application/x-www-form-urlencoded"
-        //String password = request.getParameter("password");
         try {
             appUser = new ObjectMapper().readValue(request.getInputStream(), AppUser.class);
             // j'utilise Objectmapper pour desérialiser les données directement
@@ -54,6 +53,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                .claim("roles", springUser.getAuthorities())
                .compact();
        response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + jwt);
-        super.successfulAuthentication(request, response, chain, authResult);
+        //super.successfulAuthentication(request, response, chain, authResult);
     }
 }

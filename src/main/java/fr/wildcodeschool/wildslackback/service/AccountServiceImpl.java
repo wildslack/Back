@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public void addRoleToUser(String email, String roleName) {
-        AppRole role = roleRepository.findByRoleName(roleName); // on va chercher le role en base
+        AppRole role = roleRepository.findByRoleName(roleName); /// / on va chercher le role en base
         AppUser user = userRepository.findByEmail(email);  // peux être changer par pseudo // on va cherche l'utilisateur en base
         user.getRoles().add(role); //j'ajoute le role à l'utilisateur
         // la méthode est transctionnel donc quand elle commit elle sait qu'on ajouté un role et donc le rajoute au niveau de la base
@@ -44,6 +44,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public AppUser findUserByEmail(String email) {
+
         return userRepository.findByEmail(email);
     }
 }

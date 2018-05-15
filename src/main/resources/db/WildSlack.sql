@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`workspace` (
 
 CREATE TABLE IF NOT EXISTS 'wildslack'.'app_role'
 (
-'id' INT NOT NULL AUTO_INCREMENT?
+'id' INT NOT NULL AUTO_INCREMENT,
 'role_name' VARCHAR(50)NOT NULL
 );
 INSERT INTO app_role values(1, 'USER');

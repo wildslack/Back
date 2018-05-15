@@ -12,7 +12,7 @@ import java.util.Collection;
 public class AppUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long idUser;
     @Column(unique = true)
     private String email;
