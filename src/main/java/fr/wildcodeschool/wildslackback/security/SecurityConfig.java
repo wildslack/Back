@@ -3,7 +3,6 @@ package fr.wildcodeschool.wildslackback.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,7 +39,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/workspace/**").hasAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();  //(Config pour obliger un user à se connecter, avec cette congi toute les ressources son ainsi sécurisées)
         http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
-        http.addFilterBefore(new JWTAutorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
 
