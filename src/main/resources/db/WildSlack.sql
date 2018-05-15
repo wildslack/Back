@@ -23,6 +23,14 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`workspace` (
   PRIMARY KEY (`id`));
 
 
+CREATE TABLE IF NOT EXISTS 'wildslack'.'app_role'
+(
+'id' INT NOT NULL AUTO_INCREMENT?
+'role_name' VARCHAR(50)NOT NULL
+);
+INSERT INTO app_role values(1, 'USER');
+INSERT INTO app_role values(2, 'ADMIN');
+
 -- -----------------------------------------------------
 -- Table `wildslack`.`chanel`
 -- -----------------------------------------------------
