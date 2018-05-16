@@ -14,8 +14,6 @@ public class AccountRestController {
     private AccountService accountService;
     @PostMapping("/register")
     public AppUser register(@RequestBody RegisterForm userForm) {
-       if (!userForm.getPassword().equals(userForm.getRepassword()))
-            throw new RuntimeException("You must confirm your password !"); // exception levée si les deux mdp sont différents
         AppUser user=accountService.findUserByEmail(userForm.getEmail());
         if (user != null) throw new RuntimeException("This user already exists");
         AppUser appUser= new AppUser();
