@@ -32,18 +32,18 @@ public class AppUserController {
      * Creates a user, a workspace, a workspaceManager and a channel by default.
      * @param mail
      * @param password
-     * @param pseudo
+     * @param nickname
      * @param workspaceName
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
     //@ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public AppUser create(@RequestParam String mail, String password, String pseudo, String workspaceName) {
+    public AppUser create(@RequestParam String mail, String password, String nickname, String workspaceName) {
         AppUser appUser = new AppUser();
         appUser.setEmail(mail);
         appUser.setPassword(password);
-        appUser.setPseudo(pseudo);
+        appUser.setNickname(nickname);
         appUserRepository.save(appUser);
 
         Workspace workspace = new Workspace();

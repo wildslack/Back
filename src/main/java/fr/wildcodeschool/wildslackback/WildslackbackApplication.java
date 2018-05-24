@@ -19,7 +19,6 @@ public class WildslackbackApplication extends SpringBootServletInitializer {
 
 
 
-@Autowired
 	public static void main(String... args) {
 		SpringApplication.run(WildslackbackApplication.class, args);
 	}

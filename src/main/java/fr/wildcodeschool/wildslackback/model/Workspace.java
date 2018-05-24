@@ -1,10 +1,7 @@
 package fr.wildcodeschool.wildslackback.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Workspace {
@@ -14,6 +11,7 @@ public class Workspace {
     private long idWorkspace;
     private String name;
     private String description;
+
 
     public Workspace() {}
 

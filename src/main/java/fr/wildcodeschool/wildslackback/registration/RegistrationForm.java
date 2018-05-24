@@ -6,4 +6,6 @@ import lombok.Data;
 public class RegistrationForm {
     private String email;
     private String password;
+    private String nickname;
+    private String workspaceName;
 }

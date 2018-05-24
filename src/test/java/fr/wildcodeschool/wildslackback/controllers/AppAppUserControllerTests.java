@@ -29,12 +29,12 @@ public class AppAppUserControllerTests {
 
     @Test
     public void testBobtestExists() {
-        assertThat(appUserRepository.findByPseudo("bobtest").getEmail().equals("test@test.test"));
+        assertThat(appUserRepository.findByNickname("bobtest").getEmail().equals("test@test.test"));
     }
 
     @Test
     public void testCattestExists() {
-        assertThat(appUserRepository.findByPseudo("cattest").getEmail().equals("dshfg@test.test"));
+        assertThat(appUserRepository.findByNickname("cattest").getEmail().equals("dshfg@test.test"));
     }
 
 
