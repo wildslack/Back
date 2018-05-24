@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`chanel` (
 -- Table `wildslack`.`AppUser`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `wildslack`.`User` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(10) NOT NULL,
   `pseudo` VARCHAR(45) NOT NULL,
@@ -153,12 +153,6 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_manager` (
     REFERENCES `wildslack`.`workspace` (`id`));
 
 
-
-CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_manager` (
- `id` INT NOT NULL AUTO_INCREMENT,
-  `role_name` VARCHAR(50)NOT NULL,
-  PRIMARY KEY (`id`)
-);
 INSERT INTO app_role values(1, 'USER');
 INSERT INTO app_role values(2, 'ADMIN');
 

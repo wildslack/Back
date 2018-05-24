@@ -2,33 +2,34 @@ package fr.wildcodeschool.wildslackback.controllers;
 
 
 import fr.wildcodeschool.wildslackback.model.AppUser;
+import fr.wildcodeschool.wildslackback.model.Channel;
 import fr.wildcodeschool.wildslackback.model.Workspace;
 import fr.wildcodeschool.wildslackback.model.WorkspaceManager;
-import fr.wildcodeschool.wildslackback.repo.UserRepository;
+import fr.wildcodeschool.wildslackback.repo.ChannelRepository;
+import fr.wildcodeschool.wildslackback.repo.AppUserRepository;
 import fr.wildcodeschool.wildslackback.repo.WorkspaceManagerRepository;
 import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 @RequestMapping("/users")
-public class UserController {
+public class AppUserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private AppUserRepository appUserRepository;
     @Autowired
     private WorkspaceRepository workspaceRepository;
     @Autowired
     WorkspaceManagerRepository workspaceManagerRepository;
+    @Autowired
+    ChannelRepository channelRepository;
 
     /**
-     * Creates a user, a workspace and a workspaceManager.
+     * Creates a user, a workspace, a workspaceManager and a channel by default.
      * @param mail
      * @param password
      * @param pseudo
@@ -43,7 +44,7 @@ public class UserController {
         appUser.setEmail(mail);
         appUser.setPassword(password);
         appUser.setPseudo(pseudo);
-        userRepository.save(appUser);
+        appUserRepository.save(appUser);
 
         Workspace workspace = new Workspace();
         workspace.setName(workspaceName);
@@ -55,6 +56,11 @@ public class UserController {
         WorkspaceManager workspaceManager = new WorkspaceManager(userId, workspaceId);
         workspaceManagerRepository.save(workspaceManager);
 
+        // create channel by default
+        Channel channelByDefault = new Channel("general", "", true, workspace);
+        channelRepository.save(channelByDefault);
+
+
         return appUser;
 
     }
@@ -62,7 +68,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public Iterable<AppUser> getAllUsers() {
-        return userRepository.findAll();
+        return appUserRepository.findAll();
     }
 
 

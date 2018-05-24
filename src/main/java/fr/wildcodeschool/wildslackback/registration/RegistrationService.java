@@ -1,9 +1,9 @@
-package fr.wildcodeschool.wildslackback.service;
+package fr.wildcodeschool.wildslackback.registration;
 
 import fr.wildcodeschool.wildslackback.model.AppRole;
 import fr.wildcodeschool.wildslackback.model.AppUser;
 
-public interface AccountService {
+public interface RegistrationService {
     //ajoute un user dans l'appli
     AppUser saveUser(AppUser user);
 

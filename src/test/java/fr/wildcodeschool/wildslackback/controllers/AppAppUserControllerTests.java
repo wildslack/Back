@@ -1,7 +1,7 @@
 package fr.wildcodeschool.wildslackback.controllers;
 
 
-import fr.wildcodeschool.wildslackback.repo.UserRepository;
+import fr.wildcodeschool.wildslackback.repo.AppUserRepository;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 
@@ -14,27 +14,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AppUserControllerTests {
+public class AppAppUserControllerTests {
 
     @Autowired
-    UserController userController;
+    AppUserController appUserController;
     @Autowired
-    UserRepository userRepository;
+    AppUserRepository appUserRepository;
 
 
     @Test
     public void contextLoads() throws Exception {
-        assertThat(userController).isNotNull();
+        assertThat(appUserController).isNotNull();
     }
 
     @Test
     public void testBobtestExists() {
-        assertThat(userRepository.findByPseudo("bobtest").getEmail().equals("test@test.test"));
+        assertThat(appUserRepository.findByPseudo("bobtest").getEmail().equals("test@test.test"));
     }
 
     @Test
     public void testCattestExists() {
-        assertThat(userRepository.findByPseudo("cattest").getEmail().equals("dshfg@test.test"));
+        assertThat(appUserRepository.findByPseudo("cattest").getEmail().equals("dshfg@test.test"));
     }
 
 
