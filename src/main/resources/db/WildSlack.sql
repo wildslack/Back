@@ -22,89 +22,95 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`workspace` (
   `description` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-
-CREATE TABLE IF NOT EXISTS 'wildslack'.'app_role'
-(
-'id' INT NOT NULL AUTO_INCREMENT,
-'role_name' VARCHAR(50)NOT NULL
-);
-INSERT INTO app_role values(1, 'USER');
-INSERT INTO app_role values(2, 'ADMIN');
+-- -----------------------------------------------------
+-- Table `wildslack`.`app_role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wildslack`.`app_role`(
+`id` INT NOT NULL,
+`role_name` VARCHAR(50)NOT NULL,
+PRIMARY KEY (`id`));
+INSERT INTO app_role(id,role_name) VALUES (1,"USER");
+INSERT INTO app_role values(2, "ADMIN");
 
 -- -----------------------------------------------------
--- Table `wildslack`.`chanel`
+-- Table `wildslack`.`channel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`chanel` (
+CREATE TABLE IF NOT EXISTS `wildslack`.`channel` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `description` VARCHAR(50) NULL DEFAULT NULL,
+  `default_channel` BOOLEAN,
   `id_workspace` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX (`id_workspace` ASC),
-  CONSTRAINT `chanel`
+  CONSTRAINT `channel`
     FOREIGN KEY (`id_workspace`)
     REFERENCES `wildslack`.`workspace` (`id`));
 
 
 -------------------------------------------------------
--- Table `wildslack`.`AppUser`
+-- Table `wildslack`.`app_user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`User` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `wildslack`.`app_user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(10) NOT NULL,
-  `pseudo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID`),
+  `nickname` VARCHAR(45) NOT NULL,
+  `last_channel_id` INT ,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `mail_UNIQUE` (`email` ASC),
+	FOREIGN KEY (`last_channel_id`)
+    REFERENCES `wildslack`.`channel` (`id`));  
+  
 
-  UNIQUE INDEX `mail_UNIQUE` (`email` ASC));
 
 
 -- -----------------------------------------------------
 -- Table `wildslack`.`workspace_member`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_member` (
-  `id_user` INT NOT NULL,
+  `id_app_user` INT NOT NULL,
   `id_workspace` INT NOT NULL,
-  INDEX (`id_user` ASC),
+  INDEX (`id_app_user` ASC),
   INDEX (`id_workspace` ASC),
   CONSTRAINT `workspace_member`
-    FOREIGN KEY (`id_user`)
-    REFERENCES `wildslack`.`user` (`id`),
+    FOREIGN KEY (`id_app_user`)
+    REFERENCES `wildslack`.`app_user` (`id`),
   CONSTRAINT ``
     FOREIGN KEY (`id_workspace`)
     REFERENCES `wildslack`.`workspace` (`id`));
 
 
 -- -----------------------------------------------------
--- Table `wildslack`.`chanel_manager`
+-- Table `wildslack`.`channel_manager`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`chanel_manager` (
-  `id_user` INT NOT NULL,
-  `id_chanel` INT NOT NULL,
-  INDEX (`id_user` ASC),
-  INDEX (`id_chanel` ASC),
-  CONSTRAINT `chanel_manager_user`
-    FOREIGN KEY (`id_user`)
-    REFERENCES `wildslack`.`user` (`id`),
-  CONSTRAINT `chanel_manager`
-    FOREIGN KEY (`id_chanel`)
-    REFERENCES `wildslack`.`chanel` (`id`));
+CREATE TABLE IF NOT EXISTS `wildslack`.`channel_manager` (
+  `id_app_user` INT NOT NULL,
+  `id_channel` INT NOT NULL,
+  INDEX (`id_app_user` ASC),
+  INDEX (`id_channel` ASC),
+  CONSTRAINT `channel_manager_app_user`
+    FOREIGN KEY (`id_app_user`)
+    REFERENCES `wildslack`.`app_user` (`id`),
+  CONSTRAINT `channel_manager`
+    FOREIGN KEY (`id_channel`)
+    REFERENCES `wildslack`.`channel` (`id`));
 
 
 -- -----------------------------------------------------
--- Table `wildslack`.`chanel_member`
+-- Table `wildslack`.`channel_member`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`chanel_member` (
-  `id_chanel` INT NOT NULL,
-  `id_user` INT NOT NULL,
-  INDEX (`id_chanel` ASC),
-  INDEX (`id_user` ASC),
-  CONSTRAINT `chanel_member`
-    FOREIGN KEY (`id_chanel`)
-    REFERENCES `wildslack`.`chanel` (`id`),
-  CONSTRAINT `chanel_member_user`
-    FOREIGN KEY (`id_user`)
-    REFERENCES `wildslack`.`user` (`id`));
+CREATE TABLE IF NOT EXISTS `wildslack`.`channel_member` (
+  `id_channel` INT NOT NULL,
+  `id_app_user` INT NOT NULL,
+  INDEX (`id_channel` ASC),
+  INDEX (`id_app_user` ASC),
+  CONSTRAINT `channel_member`
+    FOREIGN KEY (`id_channel`)
+    REFERENCES `wildslack`.`channel` (`id`),
+  CONSTRAINT `channel_member_app_user`
+    FOREIGN KEY (`id_app_user`)
+    REFERENCES `wildslack`.`app_user` (`id`));
 
 
 -- -----------------------------------------------------
@@ -120,47 +126,39 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`message` (
 -- Table `wildslack`.`post`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `wildslack`.`post` (
-  `id_user` INT NOT NULL,
+  `id_app_user` INT NOT NULL,
   `id_message` INT NOT NULL,
-  `id_chanel` INT NOT NULL,
-  INDEX (`id_user` ASC),
+  `id_channel` INT NOT NULL,
+  INDEX (`id_app_user` ASC),
   INDEX (`id_message` ASC),
-  INDEX (`id_chanel` ASC),
-  CONSTRAINT `post_user`
-    FOREIGN KEY (`id_user`)
-    REFERENCES `wildslack`.`user` (`id`),
+  INDEX (`id_channel` ASC),
+  CONSTRAINT `post_app_user`
+    FOREIGN KEY (`id_app_user`)
+    REFERENCES `wildslack`.`app_user` (`id`),
   CONSTRAINT `post_message`
     FOREIGN KEY (`id_message`)
     REFERENCES `wildslack`.`message` (`id`),
-  CONSTRAINT `post_chanel`
-    FOREIGN KEY (`id_chanel`)
-    REFERENCES `wildslack`.`chanel` (`id`));
+  CONSTRAINT `post_channel`
+    FOREIGN KEY (`id_channel`)
+    REFERENCES `wildslack`.`channel` (`id`));
 
 
 -- -----------------------------------------------------
 -- Table `wildslack`.`workspace_manager`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_manager` (
-  `id_user` INT NOT NULL,
+  `id_app_user` INT NOT NULL,
   `id_workspace` INT NOT NULL,
-  INDEX (`id_user` ASC),
+  INDEX (`id_app_user` ASC),
   INDEX (`id_workspace` ASC),
-  CONSTRAINT `workspace_manager_user`
-    FOREIGN KEY (`id_user`)
-    REFERENCES `wildslack`.`user` (`id`),
+  CONSTRAINT `workspace_manager_app_user`
+    FOREIGN KEY (`id_app_user`)
+    REFERENCES `wildslack`.`app_user` (`id`),
   CONSTRAINT `workspace_manager`
     FOREIGN KEY (`id_workspace`)
     REFERENCES `wildslack`.`workspace` (`id`));
 
 
-
-CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_manager` (
- `id` INT NOT NULL AUTO_INCREMENT,
-  `role_name` VARCHAR(50)NOT NULL,
-  PRIMARY KEY (`id`)
-);
-INSERT INTO app_role values(1, 'USER');
-INSERT INTO app_role values(2, 'ADMIN');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
