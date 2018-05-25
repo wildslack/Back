@@ -1,14 +1,13 @@
 package fr.wildcodeschool.wildslackback.registration;
 
-import fr.wildcodeschool.wildslackback.model.AppUser;
-import fr.wildcodeschool.wildslackback.model.AppRole;
-import fr.wildcodeschool.wildslackback.repo.RoleRepository;
-import fr.wildcodeschool.wildslackback.repo.AppUserRepository;
+import fr.wildcodeschool.wildslackback.model.*;
+import fr.wildcodeschool.wildslackback.repo.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @Transactional
@@ -20,12 +19,16 @@ public class RegistrationServiceImpl implements RegistrationService {
     private AppUserRepository appUserRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private WorkspaceRepository workspaceRepository;
+    @Autowired
+    WorkspaceManagerRepository workspaceManagerRepository;
+    @Autowired
+    ChannelRepository channelRepository;
 
-    @Override
-    public AppUser saveUser(AppUser user) {
-        String hashPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(hashPassword);
-        return appUserRepository.save(user);
+
+    public String hashPassword(String password) {
+        return bCryptPasswordEncoder.encode(password);
     }
 
     @Override
@@ -44,7 +47,39 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public AppUser findUserByEmail(String email) {
-
         return appUserRepository.findByEmail(email);
     }
+
+    @Override
+    public void createChannel(Workspace workspace) {
+        Channel channelByDefault = new Channel("general", "", true, workspace);
+        channelRepository.save(channelByDefault);
+    }
+
+    @Override
+    public void createWorkspaceManager(AppUser appUser, Workspace workspace) {
+        long userId = appUser.getIDUser();
+        long workspaceId = workspace.getIdWorkspace();
+        WorkspaceManager workspaceManager = new WorkspaceManager(userId, workspaceId);
+        workspaceManagerRepository.save(workspaceManager);
+    }
+
+    @Override
+    public Workspace createWorkspace(String workspaceName) {
+        Workspace workspace = new Workspace();
+        workspace.setName(workspaceName);
+        workspaceRepository.save(workspace);
+        return workspace;
+    }
+
+    @Override
+    public AppUser createAppUser(String email, String password, String nickname) {
+        AppUser appUser = new AppUser();
+        appUser.setEmail(email);
+        appUser.setPassword(password);
+        appUser.setNickname(nickname);
+        appUserRepository.save(appUser);
+        return appUser;
+    }
+
 }

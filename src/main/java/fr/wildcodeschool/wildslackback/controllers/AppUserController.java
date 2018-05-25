@@ -28,42 +28,14 @@ public class AppUserController {
     @Autowired
     ChannelRepository channelRepository;
 
-    /**
-     * Creates a user, a workspace, a workspaceManager and a channel by default.
-     * @param mail
-     * @param password
-     * @param nickname
-     * @param workspaceName
-     * @return
-     */
+/*
     @RequestMapping(method = RequestMethod.POST)
     //@ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public AppUser create(@RequestParam String mail, String password, String nickname, String workspaceName) {
-        AppUser appUser = new AppUser();
-        appUser.setEmail(mail);
-        appUser.setPassword(password);
-        appUser.setNickname(nickname);
-        appUserRepository.save(appUser);
-
-        Workspace workspace = new Workspace();
-        workspace.setName(workspaceName);
-        workspaceRepository.save(workspace);
-
-        //create workspaceManager by saving idUser and idWorkspace in the Workspace_Manager table
-        long userId = appUser.getIDUser();
-        long workspaceId = workspace.getIdWorkspace();
-        WorkspaceManager workspaceManager = new WorkspaceManager(userId, workspaceId);
-        workspaceManagerRepository.save(workspaceManager);
-
-        // create channel by default
-        Channel channelByDefault = new Channel("general", "", true, workspace);
-        channelRepository.save(channelByDefault);
-
-
+    public AppUser create() {
         return appUser;
+    }*/
 
-    }
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
