@@ -1,0 +1,34 @@
+{
+  "channels": [
+    {
+      "id": 1,
+      "name": "wildslack",
+      "description": "aspirine inc"
+    },
+    {
+      "id": 2,
+      "name": "Paul",
+      "description": "Talk about me"
+    },
+    {
+      "id": 3,
+      "name": "m&m's",
+      "description": "Julien's best friends"
+    },
+    {
+      "id": 4,
+      "name": "apple",
+      "description": "have you seen my delete ?  "
+    },
+    {
+      "id": 5,
+      "name": "linux",
+      "description": "hum ? "
+    },
+    {
+      "id": 6,
+      "name": "microsoft",
+      "description": "waiting for update again"
+    }
+  ]
+}
