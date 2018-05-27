@@ -1,7 +1,5 @@
 package fr.wildcodeschool.wildslackback;
 
-import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;
-import fr.wildcodeschool.wildslackback.service.AccountService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -21,7 +19,6 @@ public class WildslackbackApplication extends SpringBootServletInitializer {
 
 
 
-@Autowired
 	public static void main(String... args) {
 		SpringApplication.run(WildslackbackApplication.class, args);
 	}
