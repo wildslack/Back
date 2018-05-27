@@ -20,10 +20,19 @@ public class AppUser {
     private String nickname;
 
     @ManyToMany
-    private Collection<Workspace> workspace;
+    private Collection<Workspace> workspaces;//ws_memberships
+/*
+    @ManyToMany
+    private Collection<Workspace> workspaces;//managed_workspaces
+    */
 
+    //avec cette table, un user peut avoir 2 roles au maximum : user et admin
+    // mais il n'existe aucun moyen de dire de quoi il est l'un ou l'autre
+    // soit on modifie cette table en ajoutant un id_workspace pour stocker directement les rôles
+    // en fonction du workspace, soit on utilise les tables ws_member et ws_manager
     @ManyToMany(fetch = FetchType.EAGER) // un utilisateur peut avoir plusieurs role et un role peut xoncerner plusieurs utilisateurs
     private Collection<AppRole> roles = new ArrayList<>();
+
 
     public AppUser() {}
 
