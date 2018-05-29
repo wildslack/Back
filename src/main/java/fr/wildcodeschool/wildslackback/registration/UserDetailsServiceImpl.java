@@ -1,6 +1,7 @@
-package fr.wildcodeschool.wildslackback.service;
+package fr.wildcodeschool.wildslackback.registration;
 
 import fr.wildcodeschool.wildslackback.model.AppUser;
+import fr.wildcodeschool.wildslackback.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,11 +18,11 @@ import java.util.Collection;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private AccountService accountService;
+    private RegistrationService registrationService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        AppUser user = accountService.findUserByEmail(email); // je sais pas si  sa passe avec cette methode sinon changer pour pseudo
+        AppUser user = registrationService.findUserByEmail(email); // je sais pas si  sa passe avec cette methode sinon changer pour pseudo
         if (user == null) throw new UsernameNotFoundException(email);
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
