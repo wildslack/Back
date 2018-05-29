@@ -32,7 +32,7 @@ public class RegistrationController {
 
         registrationService.addRoleToUser(registrationForm.getEmail(), "USER"); // attribution du role USER par default à l'utilisateur qui s'innscrit
 
-        Workspace workspace = registrationService.createWorkspace(registrationForm.getWorkspaceName());
+        Workspace workspace = registrationService.createWorkspace(registrationForm.getWorkspaceName(),appUser);
         //create workspaceManager by saving idUser and idWorkspace in the Workspace_Manager table
         registrationService.createWorkspaceManager(appUser, workspace);
         // create channel by default

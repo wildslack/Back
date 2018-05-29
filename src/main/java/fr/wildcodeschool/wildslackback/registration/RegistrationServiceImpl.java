@@ -65,9 +65,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public Workspace createWorkspace(String workspaceName) {
+    public Workspace createWorkspace(String workspaceName,AppUser appUser) {
+
         Workspace workspace = new Workspace();
         workspace.setName(workspaceName);
+        workspace.addAppUser(appUser);
         workspaceRepository.save(workspace);
         return workspace;
     }
@@ -81,5 +83,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         appUserRepository.save(appUser);
         return appUser;
     }
+
+
 
 }
