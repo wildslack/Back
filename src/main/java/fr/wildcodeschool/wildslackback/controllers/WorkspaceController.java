@@ -7,6 +7,9 @@ import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/workspaces")
 public class WorkspaceController {
@@ -28,6 +31,14 @@ public class WorkspaceController {
     public Iterable<Workspace> getAllWorkspaces() {
         return workspaceRepository.findAll();
     }
+
+   /* @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<Workspace> workspacesByUser(@RequestParam Long userId){
+        return workspaceRepository.findByUser(userId);
+
+
+    }*/
 
 }
 

@@ -2,6 +2,8 @@ package fr.wildcodeschool.wildslackback.model;
 
 
 import javax.persistence.*;
+import java.util.Collection;
+
 
 @Entity
 public class Workspace {
@@ -12,6 +14,9 @@ public class Workspace {
     private String name;
     private String description;
 
+    @ManyToMany
+    @Ta
+    private Collection<AppUser> appUsers ;
 
     public Workspace() {}
 
