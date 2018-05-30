@@ -8,7 +8,7 @@ public interface RegistrationService {
 
     AppUser createAppUser(String email, String password, String nickname);
 
-    Workspace createWorkspace(String workspaceName);
+    Workspace createWorkspace(String workspaceName,AppUser appUser);
 
     void createWorkspaceManager(AppUser appUser, Workspace workspace);
 
@@ -24,4 +24,6 @@ public interface RegistrationService {
 
     //retourne l'utilisateur
     AppUser findUserByEmail(String email);
+
+
 }

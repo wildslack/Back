@@ -2,6 +2,9 @@ package fr.wildcodeschool.wildslackback.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Workspace {
@@ -11,6 +14,16 @@ public class Workspace {
     private long idWorkspace;
     private String name;
     private String description;
+
+    @ManyToMany
+    @JoinTable(name = "workspace_users",joinColumns = @JoinColumn(name = "id_workspace"),
+            inverseJoinColumns = @JoinColumn(name = "id_user"))
+    Collection<AppUser> appUsers = new ArrayList<>();
+
+
+
+
+
 
 
     public Workspace() {}
@@ -40,4 +53,7 @@ public class Workspace {
         this.description = description;
     }
 
+    public void addAppUser( AppUser appUser) {
+        this.appUsers.add(appUser);
+    }
 }
