@@ -11,7 +11,7 @@ import java.util.List;
 public interface WorkspaceRepository extends JpaRepository<Workspace, Long> {
 
     Workspace findByName(String name);
-    Workspace
+
 
     @Query(value = "SELECT w FROM Workspace w JOIN w.appUsers u WHERE u.idUser = :idUser")
     List<Workspace> findWorkspacesByAppUsers(@Param("idUser") long idUser);
