@@ -19,8 +19,10 @@ public class AppUser {
     private String password;
     private String nickname;
 
-    @ManyToMany
-    private Collection<Workspace> workspaces;//ws_memberships
+    @ManyToMany(mappedBy = "appUsers")
+    private Collection<Workspace> workspaces = new ArrayList<>();
+
+
 /*
     @ManyToMany
     private Collection<Workspace> workspaces;//managed_workspaces
@@ -78,5 +80,13 @@ public class AppUser {
 
     public void setRoles(Collection<AppRole> roles) {
         this.roles = roles;
+    }
+
+    public long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
     }
 }
