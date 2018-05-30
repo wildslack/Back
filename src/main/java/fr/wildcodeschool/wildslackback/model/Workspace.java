@@ -19,6 +19,13 @@ public class Workspace {
     @JoinTable(name = "workspace_users",joinColumns = @JoinColumn(name = "id_workspace"),
             inverseJoinColumns = @JoinColumn(name = "id_user"))
     Collection<AppUser> appUsers = new ArrayList<>();
+
+
+
+
+
+
+
     public Workspace() {}
 
     public Workspace(String name, String description) {

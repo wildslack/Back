@@ -1,7 +1,7 @@
 package fr.wildcodeschool.wildslackback.controllers;
 
 
-import fr.wildcodeschool.wildslackback.model.AppUser;
+
 import fr.wildcodeschool.wildslackback.model.Workspace;
 import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;
 
@@ -36,6 +36,12 @@ public class WorkspaceController {
     @ResponseBody
     public Iterable<Workspace> getWorkspaceByUser(@RequestParam long idUser){
         return workspaceRepository.findWorkspacesByAppUsers(idUser);
+    }
+
+    @RequestMapping(value = "last",method = RequestMethod.GET)
+    @ResponseBody
+    public Workspace getDefaultWorkspace(@RequestParam long idUser){
+        return  workspaceRepository.findLastWorkspacesByAppUsers(idUser);
     }
 
 }

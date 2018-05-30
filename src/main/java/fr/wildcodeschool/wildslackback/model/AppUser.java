@@ -21,6 +21,8 @@ public class AppUser {
 
     @ManyToMany(mappedBy = "appUsers")
     private Collection<Workspace> workspaces = new ArrayList<>();
+
+
 /*
     @ManyToMany
     private Collection<Workspace> workspaces;//managed_workspaces
