@@ -2,6 +2,7 @@ package fr.wildcodeschool.wildslackback.model;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Channel {
@@ -12,6 +13,9 @@ public class Channel {
     private String name;
     private String description;
     private Boolean defaultChannel;
+
+    @OneToMany(mappedBy = "channel")
+    private Set<AppUser>   appUsers ;
 
     @ManyToOne
     private Workspace workspace;
