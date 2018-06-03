@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class AppUser {
@@ -18,6 +19,10 @@ public class AppUser {
     private String email;
     private String password;
     private String nickname;
+
+    @ManyToOne
+    @JoinColumn(name = "last_chan")
+    private Channel channel;
 
     @ManyToMany(mappedBy = "appUsers")
     private Collection<Workspace> workspaces = new ArrayList<>();
