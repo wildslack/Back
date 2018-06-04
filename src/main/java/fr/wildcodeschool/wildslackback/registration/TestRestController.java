@@ -1,4 +1,4 @@
-package fr.wildcodeschool.wildslackback.web;
+package fr.wildcodeschool.wildslackback.registration;
 
 import fr.wildcodeschool.wildslackback.model.Workspace;
 import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;

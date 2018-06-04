@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class AppUser {
@@ -17,17 +18,35 @@ public class AppUser {
     @Column(unique = true)
     private String email;
     private String password;
-    private String pseudo;
+    private String nickname;
 
+    @ManyToOne
+    @JoinColumn(name = "last_chan")
+    private Channel channel;
+
+    @ManyToMany(mappedBy = "appUsers")
+    private Collection<Workspace> workspaces = new ArrayList<>();
+
+
+/*
+    @ManyToMany
+    private Collection<Workspace> workspaces;//managed_workspaces
+    */
+
+    //avec cette table, un user peut avoir 2 roles au maximum : user et admin
+    // mais il n'existe aucun moyen de dire de quoi il est l'un ou l'autre
+    // soit on modifie cette table en ajoutant un id_workspace pour stocker directement les rôles
+    // en fonction du workspace, soit on utilise les tables ws_member et ws_manager
     @ManyToMany(fetch = FetchType.EAGER) // un utilisateur peut avoir plusieurs role et un role peut xoncerner plusieurs utilisateurs
     private Collection<AppRole> roles = new ArrayList<>();
 
+
     public AppUser() {}
 
-    public AppUser(String email, String password, String pseudo) {
+    public AppUser(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
-        this.pseudo = pseudo;
+        this.nickname = nickname;
     }
 
 
@@ -52,12 +71,12 @@ public class AppUser {
         this.password = password;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Collection<AppRole> getRoles() {
@@ -66,5 +85,13 @@ public class AppUser {
 
     public void setRoles(Collection<AppRole> roles) {
         this.roles = roles;
+    }
+
+    public long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
     }
 }

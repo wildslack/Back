@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "bob@bob.com",
+      "password": 123456,
+      "nickname": "boby"
+    },
+    {
+      "id": 2,
+      "email": "robert@michaud.fr",
+      "password": 7894,
+      "nickname": "roberta"
+    },
+    {
+      "id": 3,
+      "email": "galy@gmail.com",
+      "password": "miammiam",
+      "nickname": "aligator"
+    },
+    {
+      "id": 4,
+      "email": "jean@hotmail.fr",
+      "password": 568794,
+      "nickname": "jeanjean"
+    },
+    {
+      "id": 5,
+      "email": "pinou@truc.fr",
+      "password": 48268598,
+      "nickname": "noupi"
+    },
+    {
+      "id": 6,
+      "email": "arthur@live.fr",
+      "password": "excalibur",
+      "nickname": "Pendragon"
+    },
+    {
+      "id": 7,
+      "email": "mickey@yahoo.fr",
+      "password": 547852,
+      "nickname": "Mouse"
+    }
+  ]
+}

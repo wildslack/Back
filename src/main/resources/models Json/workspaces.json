@@ -1,0 +1,34 @@
+{
+  "workspaces": [
+    {
+      "id": 1,
+      "name": "wcs",
+      "description": "cool cool cool"
+    },
+    {
+      "id": 2,
+      "name": "opera",
+      "description": "who i am"
+    },
+    {
+      "id": 3,
+      "name": "google",
+      "description": "google is watching you"
+    },
+    {
+      "id": 4,
+      "name": "apple",
+      "description": "have you seen my usb adaptator ? "
+    },
+    {
+      "id": 5,
+      "name": "linux",
+      "description": "le papa pingouin !"
+    },
+    {
+      "id": 6,
+      "name": "microsoft",
+      "description": "waiting for update"
+    }
+  ]
+}
