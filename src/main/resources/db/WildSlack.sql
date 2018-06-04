@@ -32,29 +32,29 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`app_role` (
   INSERT INTO app_role values(2, 'ADMIN');
 
 -- -----------------------------------------------------
--- Table `wildslack`.`channel`
+-- Table `wildslack`.`chanel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`channel` (
+CREATE TABLE IF NOT EXISTS `wildslack`.`chanel` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `description` VARCHAR(50) NULL DEFAULT NULL,
   `id_workspace` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX (`id_workspace` ASC),
-  CONSTRAINT `channel`
+  CONSTRAINT `chanel`
     FOREIGN KEY (`id_workspace`)
     REFERENCES `wildslack`.`workspace` (`id`));
 
 
 -------------------------------------------------------
--- Table `wildslack`.`user`
+-- Table `wildslack`.`AppUser`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `wildslack`.`app_user` (
+  `id_user` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(10) NOT NULL,
   `nickname` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID`),
+  PRIMARY KEY (`id_user`),
 
   UNIQUE INDEX `mail_UNIQUE` (`email` ASC));
 
@@ -76,33 +76,33 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`workspace_member` (
 
 
 -- -----------------------------------------------------
--- Table `wildslack`.`channel_manager`
+-- Table `wildslack`.`chanel_manager`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`channel_manager` (
+CREATE TABLE IF NOT EXISTS `wildslack`.`chanel_manager` (
   `id_user` INT NOT NULL,
-  `id_channel` INT NOT NULL,
+  `id_chanel` INT NOT NULL,
   INDEX (`id_user` ASC),
-  INDEX (`id_channel` ASC),
-  CONSTRAINT `channel_manager_user`
+  INDEX (`id_chanel` ASC),
+  CONSTRAINT `chanel_manager_user`
     FOREIGN KEY (`id_user`)
     REFERENCES `wildslack`.`user` (`id`),
-  CONSTRAINT `channel_manager`
-    FOREIGN KEY (`id_channel`)
-    REFERENCES `wildslack`.`channel` (`id`));
+  CONSTRAINT `chanel_manager`
+    FOREIGN KEY (`id_chanel`)
+    REFERENCES `wildslack`.`chanel` (`id`));
 
 
 -- -----------------------------------------------------
--- Table `wildslack`.`channel_member`
+-- Table `wildslack`.`chanel_member`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`channel_member` (
-  `id_channel` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `wildslack`.`chanel_member` (
+  `id_chanel` INT NOT NULL,
   `id_user` INT NOT NULL,
-  INDEX (`id_channel` ASC),
+  INDEX (`id_chanel` ASC),
   INDEX (`id_user` ASC),
-  CONSTRAINT `channel_member`
-    FOREIGN KEY (`id_channel`)
-    REFERENCES `wildslack`.`channel` (`id`),
-  CONSTRAINT `channel_member_user`
+  CONSTRAINT `chanel_member`
+    FOREIGN KEY (`id_chanel`)
+    REFERENCES `wildslack`.`chanel` (`id`),
+  CONSTRAINT `chanel_member_user`
     FOREIGN KEY (`id_user`)
     REFERENCES `wildslack`.`user` (`id`));
 
@@ -113,7 +113,6 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`channel_member` (
 CREATE TABLE IF NOT EXISTS `wildslack`.`message` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `message` VARCHAR(300) NULL DEFAULT NULL,
-  'date'
   PRIMARY KEY (`id`));
 
 
@@ -123,19 +122,19 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`message` (
 CREATE TABLE IF NOT EXISTS `wildslack`.`post` (
   `id_user` INT NOT NULL,
   `id_message` INT NOT NULL,
-  `id_channel` INT NOT NULL,
+  `id_chanel` INT NOT NULL,
   INDEX (`id_user` ASC),
   INDEX (`id_message` ASC),
-  INDEX (`id_channel` ASC),
+  INDEX (`id_chanel` ASC),
   CONSTRAINT `post_user`
     FOREIGN KEY (`id_user`)
     REFERENCES `wildslack`.`user` (`id`),
   CONSTRAINT `post_message`
     FOREIGN KEY (`id_message`)
     REFERENCES `wildslack`.`message` (`id`),
-  CONSTRAINT `post_channel`
-    FOREIGN KEY (`id_channel`)
-    REFERENCES `wildslack`.`channel` (`id`));
+  CONSTRAINT `post_chanel`
+    FOREIGN KEY (`id_chanel`)
+    REFERENCES `wildslack`.`chanel` (`id`));
 
 
 -- -----------------------------------------------------
