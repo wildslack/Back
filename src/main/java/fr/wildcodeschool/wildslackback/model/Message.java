@@ -3,10 +3,7 @@ package fr.wildcodeschool.wildslackback.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -22,9 +19,9 @@ public class Message {
 
     private String message;
 
-    @ManyToOne
+    @ManyToOne//(fetch = FetchType.LAZY)
     private AppUser appUser;
 
-    @ManyToOne
+    @ManyToOne//(fetch = FetchType.LAZY)
     private Channel channel;
 }

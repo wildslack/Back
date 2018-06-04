@@ -49,12 +49,12 @@ CREATE TABLE IF NOT EXISTS `wildslack`.`chanel` (
 -------------------------------------------------------
 -- Table `wildslack`.`AppUser`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wildslack`.`User` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `wildslack`.`app_user` (
+  `id_user` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(10) NOT NULL,
   `nickname` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID`),
+  PRIMARY KEY (`id_user`),
 
   UNIQUE INDEX `mail_UNIQUE` (`email` ASC));
 
