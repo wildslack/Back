@@ -48,9 +48,9 @@ public class MessageDeserializer extends StdDeserializer<Message> {
         if (appUser.isPresent() && channel.isPresent()) {
             messageFromJson = new Message(postDate, message, appUser.get(), channel.get());
         } else {
-            messageFromJson = new Message();
+            System.out.println("Invalid format for message creation, impossible to retrieve either the user or the channel.");
+            messageFromJson = null;
         }
-
         return messageFromJson;
     }
 }
