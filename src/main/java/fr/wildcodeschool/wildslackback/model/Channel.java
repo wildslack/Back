@@ -1,7 +1,13 @@
 package fr.wildcodeschool.wildslackback.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Channel {
@@ -13,8 +19,20 @@ public class Channel {
     private String description;
     private Boolean defaultChannel;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "channel")
+    private Set<AppUser> appUsers ;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Workspace workspace;
+
+    @OneToMany
+    private List<Message> message;
+  
+    @ManyToMany
+    @JoinTable(name = "channel_users",joinColumns = @JoinColumn(name = "id_channel"),
+            inverseJoinColumns = @JoinColumn(name = "id_user"))
+    Collection<AppUser> channelAppUsers = new ArrayList<>();
 
     public Channel() {
     }

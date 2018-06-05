@@ -1,7 +1,6 @@
 package fr.wildcodeschool.wildslackback.registration;
 
 import fr.wildcodeschool.wildslackback.model.AppUser;
-import fr.wildcodeschool.wildslackback.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
