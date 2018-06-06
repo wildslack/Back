@@ -21,12 +21,6 @@ public class Workspace {
             inverseJoinColumns = @JoinColumn(name = "id_user"))
     Collection<AppUser> appUsers = new ArrayList<>();
 
-
-
-
-
-
-
     public Workspace() {}
 
     public Workspace(String name, String description) {

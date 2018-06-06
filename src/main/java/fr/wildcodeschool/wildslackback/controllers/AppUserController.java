@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api")
 public class AppUserController {
 
     @Autowired
@@ -41,6 +41,12 @@ public class AppUserController {
     @ResponseBody
     public Iterable<AppUser> getAllUsers() {
         return appUserRepository.findAll();
+    }
+
+    @RequestMapping(value = "/channels/{id}/users",method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<AppUser> getUsersByChannel(@PathVariable("id") long idChannel){
+        return appUserRepository.getAppUserByChannel(idChannel);
     }
 
 
