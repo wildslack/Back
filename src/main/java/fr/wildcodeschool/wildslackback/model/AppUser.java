@@ -52,7 +52,7 @@ private Collection<Channel> channels = new ArrayList<>();
 
 
 
-    public long getIDUser() {
+    public long getIdUser() {
         return idUser;
     }
 
@@ -88,9 +88,7 @@ private Collection<Channel> channels = new ArrayList<>();
         this.roles = roles;
     }
 
-    public long getIdUser() {
-        return idUser;
-    }
+
 
     public void setIdUser(long idUser) {
         this.idUser = idUser;
