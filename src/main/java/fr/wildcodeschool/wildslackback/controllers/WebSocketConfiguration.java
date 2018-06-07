@@ -13,18 +13,19 @@ import org.springframework.web.socket.server.support.OriginHandshakeInterceptor;
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        OriginHandshakeInterceptor interceptor = new OriginHandshakeInterceptor();
-        registry.addEndpoint("/socket");
-        registry.addEndpoint("/socket")
-                .addInterceptors(interceptor)
-                .setAllowedOrigins("*")
-                .withSockJS();
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("/topic");
+        registry.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.setApplicationDestinationPrefixes("/app")
-                .enableSimpleBroker("/chat");
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        OriginHandshakeInterceptor interceptor = new OriginHandshakeInterceptor();
+        //registry.addEndpoint("/socket");
+        registry.addEndpoint("/socketEndpoint").withSockJS();/*
+                .addInterceptors(interceptor)
+                .setAllowedOrigins("*")*/
+
     }
+
 }

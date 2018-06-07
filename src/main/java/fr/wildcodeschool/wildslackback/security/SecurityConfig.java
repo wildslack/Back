@@ -35,7 +35,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
                                             // (verifier dans le header de la reponse http que dans set-cookie il y a bien la notion "HttpOnly qui interdit de lire le javascript).
        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
        // http.formLogin(); // je desactive la session et rend le systeme "stateless"
-        http.authorizeRequests().antMatchers("/login/**", "/register/**").permitAll();
+        http.authorizeRequests().antMatchers("/login/**", "/register/**", "/socketEndpoint/**", "/app/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/workspace/**").hasAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();  //(Config pour obliger un user à se connecter, avec cette congi toute les ressources son ainsi sécurisées)
         http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
