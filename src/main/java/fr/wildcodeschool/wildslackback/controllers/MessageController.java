@@ -34,14 +34,26 @@ public class MessageController {
 
     @RequestMapping(value = "/api/channels/{id}/messages", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> findMessagesByChannel(@PathVariable("id") long idChannel, @RequestParam("startmessageid") long startMessageId) {
+
+    public List<Message> findMessagesByChannel(@PathVariable("id") long idChannel, @RequestParam(value = "startmessageid", required = false) Long startMessageId) {
         List<Message> messages = new ArrayList<>();
-        Optional<Message> message = messageRepository.findById(startMessageId);
+        LocalDateTime postDate = null;
+        if (startMessageId != null) {
+            Optional<Message> message = messageRepository.findById(startMessageId);
+            if (message.isPresent()) {
+                postDate = message.get().getPostDate();
+            }
+        }
+        if (postDate == null) {
+            postDate = LocalDateTime.now();
+        }
+
         Optional<Channel> channel = channelRepository.findById(idChannel);
-        if (message.isPresent() && channel.isPresent()) {
-            LocalDateTime postDate = message.get().getPostDate();
+        if (channel.isPresent()) {
             messages = messageRepository.findFirst1000ByChannelAndPostDateBefore(channel.get(), postDate);
         }
+
+
         return messages;
     }
 
