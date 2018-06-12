@@ -39,12 +39,12 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
         http
             .authorizeRequests()
-            .antMatchers("/login/**", "/register/**")
+            .antMatchers("/login/**", "/register/**", "/websocket/**")
             .permitAll()
             .antMatchers(HttpMethod.POST, "/workspace/**")
             .hasAuthority("USER")
-            .antMatchers("/websocket/**")
-            .authenticated()
+/*            .antMatchers("/websocket/**")
+            .authenticated()*/
             .anyRequest()
             .authenticated();
 
