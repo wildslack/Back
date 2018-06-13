@@ -11,7 +11,8 @@ import java.util.List;
 
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
-    AppUser findByEmail(String email); // ira chercher l'email en base pour voir si l'utilisateur existe peut etre remplacer par pseudo si on décide de l'authentifier avec son pseudo
+   @Query(value = "select * from app_user where email = ?1",nativeQuery = true)
+    AppUser findByEmail(@Param("userEmail")String email); // ira chercher l'email en base pour voir si l'utilisateur existe peut etre remplacer par pseudo si on décide de l'authentifier avec son pseudo
 
     AppUser findByNickname(String nickname);
 
