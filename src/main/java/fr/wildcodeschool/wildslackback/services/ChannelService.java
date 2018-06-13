@@ -8,5 +8,7 @@ public interface ChannelService {
 
     Channel createChatChannel(Long idWorkspace, Long idUser,Long idUser2);
 
+    Channel getChatChannel(Long idUser,Long idUser2);
+
 
 }

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
+
 
 @Service
 @Transactional
@@ -38,6 +38,12 @@ public class ChannelServiceImpl implements ChannelService {
        channelRepository.save(chatChannel);
        addChannelUsers(idUser,idUser2,chatChannel);
        return chatChannel;
+    }
+
+    @Override
+    public Channel getChatChannel(Long idUser, Long idUser2) {
+       return channelRepository.findChatChannelByIdUser(idUser,idUser2);
+
     }
 
 

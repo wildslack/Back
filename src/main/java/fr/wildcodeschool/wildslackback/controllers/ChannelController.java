@@ -48,5 +48,11 @@ public class ChannelController {
         return channelService.createChatChannel(idWorkspace,idUser,idUser2);
     }
 
+    @RequestMapping(value = "/channels/chats",method = RequestMethod.GET)
+    @ResponseBody
+    public Channel getChatChannel(@Param("idUser")Long idUser,@Param("idUser2")Long idUser2){
+        return channelService.getChatChannel(idUser,idUser2);
+    }
+
 
 }
