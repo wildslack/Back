@@ -18,6 +18,11 @@ public class Channel {
     private String name;
     private String description;
     private Boolean defaultChannel;
+    private Boolean chat;
+
+
+
+
 
     @OneToMany(mappedBy = "channel")
     private Set<AppUser> appUsers ;
@@ -78,5 +83,13 @@ public class Channel {
 
     public void setDefaultChannel(Boolean defaultChannel) {
         this.defaultChannel = defaultChannel;
+    }
+
+    public Boolean getChat() {
+        return chat;
+    }
+
+    public void setChat(Boolean chat) {
+        this.chat = chat;
     }
 }
