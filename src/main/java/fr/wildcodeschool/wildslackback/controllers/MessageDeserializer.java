@@ -38,9 +38,15 @@ public class MessageDeserializer extends StdDeserializer<Message> {
         JsonNode node = p.getCodec().readTree(p);
 
         String message = node.get("message").asText();
-        LocalDateTime postDate = LocalDateTime.parse(node.get("postDate").asText());
-        Long userId = node.get("idUser").numberValue().longValue();
-        Long channelId = node.get("idChannel").numberValue().longValue();
+
+        String jsonDate = node.get("postDate").asText();
+        jsonDate = jsonDate.split("\\.")[0];
+        LocalDateTime postDate = LocalDateTime.parse(jsonDate);
+
+        Long userId = node.hasNonNull("idUser") ? node.get("idUser").numberValue().longValue() :  null;
+
+        Long channelId = node.hasNonNull("idChannel") ? node.get("idChannel").numberValue().longValue() : null;
+
         Optional<AppUser> appUser = appUserRepository.findById(userId);
         Optional<Channel> channel = channelRepository.findById(channelId);
 

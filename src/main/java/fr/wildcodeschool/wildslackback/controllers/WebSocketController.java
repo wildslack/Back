@@ -2,6 +2,8 @@ package fr.wildcodeschool.wildslackback.controllers;
 
 import fr.wildcodeschool.wildslackback.model.Greeting;
 import fr.wildcodeschool.wildslackback.model.HelloMessage;
+import fr.wildcodeschool.wildslackback.model.Message;
+import fr.wildcodeschool.wildslackback.repo.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -16,6 +18,8 @@ import java.util.Date;
 @Controller
 public class WebSocketController {
 
+    @Autowired
+    private MessageRepository messageRepository;
 /*    private final SimpMessagingTemplate template;
 
     @Autowired
@@ -37,5 +41,12 @@ public class WebSocketController {
         return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + " !");
     }
 
+
+    @MessageMapping("/post/message")
+    @SendTo("/topic/chat")
+    public Message postMessage(Message message) throws Exception {
+        Message savedMessage = messageRepository.save(message);
+        return savedMessage;
+    }
 
 }
