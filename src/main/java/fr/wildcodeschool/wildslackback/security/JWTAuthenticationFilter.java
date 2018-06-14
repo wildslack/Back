@@ -20,7 +20,6 @@ import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
-
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -33,19 +32,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         AppUser appUser = null;
         try {
             appUser = new ObjectMapper().readValue(request.getInputStream(), AppUser.class);
-            // j'utilise Objectmapper pour desérialiser les données directement
         } catch (Exception e){
             throw new RuntimeException(e);
         }
-        System.out.println("*******************");
-        System.out.println("email : " + appUser.getEmail());
-        System.out.println("password : " + appUser.getPassword());
         return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(appUser.getEmail(), appUser.getPassword()));
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-       User springUser = (User) authResult.getPrincipal(); // objet user de spring
+       User springUser = (User) authResult.getPrincipal();
        String jwt = Jwts.builder()
                .setSubject(springUser.getUsername())
                .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
@@ -53,6 +48,5 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                .claim("roles", springUser.getAuthorities())
                .compact();
        response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + jwt);
-        //super.successfulAuthentication(request, response, chain, authResult);
     }
 }
