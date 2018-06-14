@@ -22,8 +22,6 @@ public class AppUserController {
     @Autowired
     private AppUserRepository appUserRepository;
     @Autowired
-    private WorkspaceRepository workspaceRepository;
-    @Autowired
     WorkspaceManagerRepository workspaceManagerRepository;
     @Autowired
     ChannelRepository channelRepository;
@@ -43,7 +41,9 @@ public class AppUserController {
         return appUserRepository.findAll();
     }
 
-
-
-
+    @RequestMapping(value = "list",method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<AppUser> getUsersByWorkspace(@RequestParam long idWorkspace) {
+        return appUserRepository.findUsersByWorkspace(idWorkspace);
+    }
 }
