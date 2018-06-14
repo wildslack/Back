@@ -22,7 +22,7 @@ public class MessageSerializer extends JsonSerializer<Message> {
         jsonGenerator.writeStringField("message", message.getMessage());
         jsonGenerator.writeStringField("message", message.getMessage());
         jsonGenerator.writeNumberField("idUser", message.getAppUser().getIdUser());
-        jsonGenerator.writeNumberField("idChannel", message.getAppUser().getIdUser());
+        jsonGenerator.writeNumberField("idChannel", message.getChannel().getIdChannel());
         jsonGenerator.writeStringField("postDate", message.getPostDate().toString());
 
         jsonGenerator.writeEndObject();
