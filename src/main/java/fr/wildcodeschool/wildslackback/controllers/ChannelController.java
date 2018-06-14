@@ -42,6 +42,7 @@ public class ChannelController {
         return  channelRepository.findLastChannel(idUser);
     }
 
+
     @RequestMapping(value ="/channels/chats/create",method = RequestMethod.GET)
     @ResponseBody
     public Channel createChatChannel(@Param("idWorkspace")Long idWorkspace,@Param("idUser")Long idUser,@Param("idUser2")Long idUser2){
