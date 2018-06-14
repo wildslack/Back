@@ -11,12 +11,13 @@ import fr.wildcodeschool.wildslackback.repo.WorkspaceManagerRepository;
 import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api")
 public class AppUserController {
 
     @Autowired
@@ -41,9 +42,24 @@ public class AppUserController {
         return appUserRepository.findAll();
     }
 
+
     @RequestMapping(value = "list",method = RequestMethod.GET)
     @ResponseBody
     public Iterable<AppUser> getUsersByWorkspace(@RequestParam long idWorkspace) {
         return appUserRepository.findUsersByWorkspace(idWorkspace);
     }
+
+    @RequestMapping(value = "/channels/{id}/users",method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<AppUser> getUsersByChannel(@PathVariable("id") long idChannel){
+        return appUserRepository.getAppUserByChannel(idChannel);
+    }
+
+    @RequestMapping(value = "/users/current",method = RequestMethod.GET)
+    @ResponseBody
+    public AppUser getCurrentUser(@Param("email")String email){
+        return  appUserRepository.findByEmail(email);
+
+    }
+
 }
