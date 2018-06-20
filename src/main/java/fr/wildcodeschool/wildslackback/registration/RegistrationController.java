@@ -1,8 +1,8 @@
 package fr.wildcodeschool.wildslackback.registration;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import fr.wildcodeschool.wildslackback.model.AppRole;
 import fr.wildcodeschool.wildslackback.model.AppUser;
+import fr.wildcodeschool.wildslackback.model.Channel;
 import fr.wildcodeschool.wildslackback.model.Workspace;
 import fr.wildcodeschool.wildslackback.repo.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,15 @@ public class RegistrationController {
 
         registrationService.addRoleToUser(registrationForm.getEmail(), "USER"); // attribution du role USER par default à l'utilisateur qui s'innscrit
 
-        Workspace workspace = registrationService.createWorkspace(registrationForm.getWorkspaceName(),appUser);
-        //create workspaceManager by saving idUser and idWorkspace in the Workspace_Manager table
-        registrationService.createWorkspaceManager(appUser, workspace);
-        // create channel by default
-        registrationService.createChannel(workspace);
+        if (registrationForm.getWorkspaceName() != null) {
+            Workspace workspace = registrationService.createWorkspace(registrationForm.getWorkspaceName(), appUser);
+
+            registrationService.createWorkspaceMember(appUser, workspace);
+
+            Channel channelByDefault = registrationService.createChannel(workspace);
+
+            registrationService.createChannelMember(appUser, channelByDefault);
+        }
 
         return appUser;
     }
