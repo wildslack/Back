@@ -37,10 +37,16 @@ public interface ChannelRepository extends JpaRepository<Channel, Long> {
     @Query(value = "insert into channel_users(id_channel,id_user) VALUES(?1,?2)",nativeQuery = true)
     void createChannelUsers(@Param("idChannel")Long idChannel,@Param("idUser")Long idUser);
 
-    @Query(value = "select * from channel where id_channel in ( select distinct c.id_channel from channel c" +
+/*    @Query(value = "select * from channel where id_channel in ( select distinct c.id_channel from channel c" +
             " join channel_users cu on cu.id_channel=c.id_channel " +
             "where c.chat=true and id_user in (?1,?2))",nativeQuery = true)
+    Channel findChatChannelByIdUser(@Param("idUser")Long idUser,@Param("idUser2")Long idUser2);*/
+
+    @Query(value = "SELECT c FROM Channel c WHERE c.chat = true AND 2 = (SELECT count(u.id) FROM c.channelAppUsers u WHERE u.id IN (:idUser, :idUser2))")
     Channel findChatChannelByIdUser(@Param("idUser")Long idUser,@Param("idUser2")Long idUser2);
 
-
 }
+
+/*
+"SELECT c FROM Channel c JOIN channel_users cu WHERE c.chat = true AND 2 = (SELECT count(u.id) FROM c.channelAppUsers u WHERE u.id IN (:idUser, :idUser2))"
+ */
