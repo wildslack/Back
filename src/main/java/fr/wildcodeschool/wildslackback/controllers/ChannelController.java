@@ -4,6 +4,7 @@ import fr.wildcodeschool.wildslackback.model.Channel;
 import fr.wildcodeschool.wildslackback.model.Workspace;
 import fr.wildcodeschool.wildslackback.repo.ChannelRepository;
 import fr.wildcodeschool.wildslackback.services.ChannelService;
+import fr.wildcodeschool.wildslackback.services.WorkspaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class ChannelController {
     @Autowired
     ChannelService channelService ;
 
+    @Autowired
+    WorkspaceService workspaceService;
+
     @RequestMapping(value = "/channels", method = RequestMethod.GET)
     @ResponseBody
     public Iterable<Channel> getChannelByUser(@RequestParam long idUser) {
@@ -30,14 +34,11 @@ public class ChannelController {
         return channelRepository.findDefaultChannel(idUser);
     }
 
-    @RequestMapping(value="/channels/create", method = RequestMethod.POST)
+    @RequestMapping(value="/channels", method = RequestMethod.POST)
    @ResponseBody
-    public Channel create(@RequestBody String name , String description) {
-        Channel channel = new Channel();
-        channel.setName(name);
-        channel.setDescription(description);
-       return channelRepository.save(channel);
-
+    public void create(@RequestBody Channel channel,@Param("idWorkspace")Long idWorkspace) {
+        channel.setWorkspace(workspaceService.getWorkspace(idWorkspace));
+        channelRepository.save(channel);
     }
 
     @RequestMapping(value = "/workspaces/{id}/channels",method = RequestMethod.GET)

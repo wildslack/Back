@@ -24,15 +24,16 @@ public class ChannelServiceImpl implements ChannelService {
     @Autowired
     AppUserRepository appUserRepository;
 
+    @Autowired
+    WorkspaceService workspaceService;
 
-   private Workspace getWorkspace(Long idWorkspace){
-       return workspaceRepository.getOne(idWorkspace);
-   }
+
+
 
 
     @Override
     public Channel createChatChannel(Long idWorkspace, Long idUser,Long idUser2) {
-       Workspace workspace = getWorkspace(idWorkspace);
+       Workspace workspace =workspaceService.getWorkspace(idWorkspace);
        Channel chatChannel = new Channel("","",false,workspace);
        chatChannel.setChat(true);
        channelRepository.save(chatChannel);
