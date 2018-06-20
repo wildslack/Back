@@ -30,14 +30,14 @@ public class ChannelController {
         return channelRepository.findDefaultChannel(idUser);
     }
 
-    @RequestMapping(value="create", method = RequestMethod.POST)
+    @RequestMapping(value="/channels/create", method = RequestMethod.POST)
    @ResponseBody
     public Channel create(@RequestBody String name , String description) {
         Channel channel = new Channel();
         channel.setName(name);
         channel.setDescription(description);
-        channelRepository.save(channel);
-        return channel;
+       return channelRepository.save(channel);
+
     }
 
     @RequestMapping(value = "/workspaces/{id}/channels",method = RequestMethod.GET)
