@@ -20,15 +20,22 @@ import java.util.Map;
 public class JWTAuthorizationFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+
+
+
         //response.addHeader("Access-Control-Allow-Origin" , "*");//"http://localhost:63342");
         response.addHeader("Access-Control-Allow-Origin" , request.getHeader("Origin"));//"http://localhost:63342");
         response.addHeader("Access-Control-Allow-Credentials" , "true");
         response.addHeader("Access-Control-Allow-Headers",
                 "Origin, Accept, X-Requested-With, "
                 + "Content-Type, Access-Control-Request-Method, "
-                + "Access-Control-Request-Headers, WildslackAuthorization");
-        response.addHeader("Access-Control-Expose-Headers",
-                "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, WildslackAuthorization");
+                + "Access-Control-Request-Headers, WildslackAuthorization"
+        );
+        response.addHeader(
+                "Access-Control-Expose-Headers",
+                "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, WildslackAuthorization"
+        );
         String jwt = request.getHeader(SecurityConstants.HEADER_STRING);
         System.out.println(jwt);
         if (request.getMethod().equals("OPTIONS")) {

@@ -1,6 +1,7 @@
 package fr.wildcodeschool.wildslackback.repo;
 
 
+import fr.wildcodeschool.wildslackback.model.AppUser;
 import fr.wildcodeschool.wildslackback.model.Workspace;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -16,6 +16,10 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     AppUser findByNickname(String nickname);
 
+
+    @Query(value = "SELECT * FROM workspace_users WHERE id_workspace", nativeQuery = true)
+    List<AppUser> findUsersByWorkspace(@Param("idWorkspace") long idWorkspace);
+
     @Query(value = "select * from app_user where id_user in ( select id_user from channel_users where id_channel =?1 )",nativeQuery = true)
     public List<AppUser> getAppUserByChannel(@Param("idChannel")long idChannel);
 

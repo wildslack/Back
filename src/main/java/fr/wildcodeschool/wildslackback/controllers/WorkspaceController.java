@@ -2,7 +2,9 @@ package fr.wildcodeschool.wildslackback.controllers;
 
 
 
+import fr.wildcodeschool.wildslackback.model.AppUser;
 import fr.wildcodeschool.wildslackback.model.Workspace;
+import fr.wildcodeschool.wildslackback.repo.AppUserRepository;
 import fr.wildcodeschool.wildslackback.repo.WorkspaceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,9 @@ public class WorkspaceController {
         return  workspaceRepository.findLastWorkspacesByAppUsers(idUser);
     }
 
-}
+
+    }
+
+
 
 

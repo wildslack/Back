@@ -34,6 +34,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -41,7 +43,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
             .antMatchers("/login/**", "/register/**", "/websocket/**")
             .permitAll()
-            .antMatchers(HttpMethod.POST, "/workspace/**")
+            .antMatchers(HttpMethod.POST, "/workspace/**", "/channels/**")
             .hasAuthority("USER")
 /*            .antMatchers("/websocket/**")
             .authenticated()*/

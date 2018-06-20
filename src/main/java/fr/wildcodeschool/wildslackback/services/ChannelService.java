@@ -11,4 +11,5 @@ public interface ChannelService {
     Channel getChatChannel(Long idUser,Long idUser2);
 
 
+
 }
