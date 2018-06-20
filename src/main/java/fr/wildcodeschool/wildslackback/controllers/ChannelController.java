@@ -36,9 +36,10 @@ public class ChannelController {
 
     @RequestMapping(value="/channels", method = RequestMethod.POST)
    @ResponseBody
-    public void create(@RequestBody Channel channel,@Param("idWorkspace")Long idWorkspace) {
+    public Channel create(@RequestBody Channel channel,@RequestParam("idWorkspace")Long idWorkspace) {
         channel.setWorkspace(workspaceService.getWorkspace(idWorkspace));
-        channelRepository.save(channel);
+        channel.setChat(false);
+         return  channelRepository.save(channel);
     }
 
     @RequestMapping(value = "/workspaces/{id}/channels",method = RequestMethod.GET)
